@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Snipwise \u2014 Screenshot & PDF",
+  "name": "Snipwise - Screenshot & PDF",
   "version": "1.0.0",
-  "description": "Screenshot any page \u2014 visible area, full page, or crop. Annotate, then save as PNG or PDF. 100% local, no uploads.",
+  "description": "Screenshot any page - visible area, full page, or crop. Annotate, then save as PNG or PDF. 100% local, no uploads.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
