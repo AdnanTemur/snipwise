@@ -240,4 +240,4 @@ MIT — do whatever you want, attribution appreciated.
 
 - PDF export: [jsPDF](https://github.com/parallax/jsPDF) — bundled locally
 - Fonts: [Inter](https://fonts.google.com/specimen/Inter), [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) via Google Fonts
-- Built by [Adnan Temur Barcha](https://github.com/AdnanTemur) — Gilgit-Baltistan, Pakistan
+- Built by [Adnan Temur Barcha](https://github.com/AdnanTemur)
