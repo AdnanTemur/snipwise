@@ -19,6 +19,7 @@ function send(dataUrl, mode = "screenshot") {
     action: "captureReady",
     dataUrl,
     title: document.title,
+    url: location.href,
     mode,
   });
 }

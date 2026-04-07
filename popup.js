@@ -6,7 +6,7 @@ const $ = (id) => document.getElementById(id);
 function applyTheme(light) {
   document.documentElement.classList.toggle("light", light);
 }
-chrome.storage.local.get(["theme"], (r) => applyTheme(r.theme === "light"));
+chrome.storage.local.get(["theme"], (r) => applyTheme(r.theme !== "dark"));
 $("themeBtn").addEventListener("click", () => {
   const light = !document.documentElement.classList.contains("light");
   applyTheme(light);
@@ -14,21 +14,7 @@ $("themeBtn").addEventListener("click", () => {
 });
 
 // ── Last capture ──────────────────────────────────────────────────────────────
-chrome.storage.local.get(["lastCapture"], (r) => {
-  if (!r.lastCapture) return;
-  $("lastInfo").textContent = `Last capture ${fmtAge(r.lastCapture.ts)}`;
-  $("lastView").style.display = "block";
-  $("lastView").addEventListener("click", () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL("editor.html") });
-  });
-});
-
-function fmtAge(ts) {
-  const s = Math.floor((Date.now() - ts) / 1000);
-  if (s < 60) return `${s}s ago`;
-  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-  return `${Math.floor(s / 3600)}h ago`;
-}
+// lastCapture feature removed — capture data is now in-memory only
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 async function getActiveTab() {
@@ -67,6 +53,7 @@ $("modeVisible").addEventListener("click", async () => {
   chrome.runtime.sendMessage({
     action: "captureVisible",
     title: tab.title,
+    url: tab.url,
     mode: "screenshot",
   });
   window.close();

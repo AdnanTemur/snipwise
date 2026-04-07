@@ -1,205 +1,323 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<title>Snipwise</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <title>Snipwise</title>
+    <style>
+      /* Fonts loaded via system stack */
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-:root{
-  --bg:#0a080f;
-  --surface:#16121f;
-  --surface2:#1e1829;
-  --border:#2d2540;
-  --border-hi:#4c3d6e;
-  --accent:#a78bfa;
-  --accent2:#7c3aed;
-  --accent3:#c4b5fd;
-  --text:#f5f3ff;
-  --muted:rgba(196,181,253,0.5);
-  --warn:#f87171;
-  --good:#4ade80;
-  --sans:'Inter',sans-serif;
-  --mono:'JetBrains Mono',monospace;
-}
-html.light{
-  --bg:#faf8ff;
-  --surface:#f3f0ff;
-  --surface2:#ede9fe;
-  --border:#ddd6fe;
-  --border-hi:#a78bfa;
-  --accent:#7c3aed;
-  --accent2:#6d28d9;
-  --accent3:#8b5cf6;
-  --text:#1e1b4b;
-  --muted:rgba(109,40,217,0.5);
-  --warn:#dc2626;
-  --good:#059669;
-}
+      :root {
+        --bg: #0a080f;
+        --surface: #16121f;
+        --surface2: #1e1829;
+        --border: #2d2540;
+        --border-hi: #4c3d6e;
+        --accent: #a78bfa;
+        --accent2: #7c3aed;
+        --accent3: #c4b5fd;
+        --text: #f5f3ff;
+        --muted: rgba(196, 181, 253, 0.5);
+        --warn: #f87171;
+        --good: #4ade80;
+        --sans:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        --mono:
+          "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code",
+          "Consolas", monospace;
+      }
+      html.light {
+        --bg: #faf8ff;
+        --surface: #f3f0ff;
+        --surface2: #ede9fe;
+        --border: #ddd6fe;
+        --border-hi: #a78bfa;
+        --accent: #7c3aed;
+        --accent2: #6d28d9;
+        --accent3: #8b5cf6;
+        --text: #1e1b4b;
+        --muted: rgba(109, 40, 217, 0.5);
+        --warn: #dc2626;
+        --good: #059669;
+      }
 
-body{
-  width:320px;
-  font-family:var(--sans);
-  color:var(--text);
-  background:var(--bg);
-  transition:background 0.25s,color 0.25s;
-  user-select:none;
-}
+      body {
+        width: 320px;
+        font-family: var(--sans);
+        color: var(--text);
+        background: var(--bg);
+        transition:
+          background 0.25s,
+          color 0.25s;
+        user-select: none;
+      }
 
-/* Header */
-.hdr{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 16px 12px;
-  border-bottom:1px solid var(--border);
-}
-.logo{display:flex;align-items:center;gap:8px}
-.logo-icon{
-  width:26px;height:26px;border-radius:6px;
-  background:linear-gradient(135deg,var(--accent2),var(--accent));
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.logo-icon svg{width:13px;height:13px}
-.logo-name{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-0.3px}
-.logo-name span{color:var(--accent)}
+      /* Header */
+      .hdr {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, var(--accent2), var(--accent));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .logo-icon svg {
+        width: 13px;
+        height: 13px;
+      }
+      .logo-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: -0.3px;
+      }
+      .logo-name span {
+        color: var(--accent);
+      }
 
-.hdr-r{display:flex;align-items:center;gap:10px}
-.tbtn{
-  width:32px;height:18px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:9px;
-  cursor:pointer;position:relative;flex-shrink:0;
-}
-.tthumb{
-  width:12px;height:12px;border-radius:50%;
-  background:var(--accent);
-  position:absolute;top:2px;left:2px;
-  transition:transform 0.25s cubic-bezier(0.34,1.4,0.64,1);
-}
-html.light .tthumb{transform:translateX(14px)}
-.status-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--good);box-shadow:0 0 6px var(--good);
-}
+      .hdr-r {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .tbtn {
+        width: 32px;
+        height: 18px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        cursor: pointer;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .tthumb {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent);
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+      }
+      html.light .tthumb {
+        transform: translateX(14px);
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--good);
+        box-shadow: 0 0 6px var(--good);
+      }
 
-/* Mode grid */
-.modes{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1px;background:var(--border);
-  border-bottom:1px solid var(--border);
-}
+      /* Mode grid */
+      .modes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--border);
+        border-bottom: 1px solid var(--border);
+      }
 
-.mode{
-  background:var(--bg);
-  padding:18px 14px 16px;
-  display:flex;flex-direction:column;gap:6px;
-  cursor:pointer;
-  transition:background 0.15s;
-  position:relative;
-  overflow:hidden;
-}
-.mode:hover{background:var(--surface)}
-.mode:active{background:var(--surface2)}
+      .mode {
+        background: var(--bg);
+        padding: 18px 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+        transition: background 0.15s;
+        position: relative;
+        overflow: hidden;
+      }
+      .mode:hover {
+        background: var(--surface);
+      }
+      .mode:active {
+        background: var(--surface2);
+      }
 
-.mode::after{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--accent2);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.2s ease;
-}
-.mode:hover::after{transform:scaleX(1)}
+      .mode::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--accent2);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+      .mode:hover::after {
+        transform: scaleX(1);
+      }
 
-.mode-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:var(--surface2);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;
-  transition:background 0.15s,border-color 0.15s;
-}
-.mode:hover .mode-icon{background:var(--accent2);border-color:var(--accent2)}
+      .mode-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+      }
+      .mode:hover .mode-icon {
+        background: var(--accent2);
+        border-color: var(--accent2);
+      }
 
-.mode-title{font-size:13px;font-weight:600;color:var(--text)}
-.mode-desc{font-size:11px;color:var(--muted);line-height:1.4}
+      .mode-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .mode-desc {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
 
-/* Last capture */
-.last{
-  padding:10px 16px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--border);
-  min-height:38px;
-}
-.last-info{font-size:11px;color:var(--muted);font-family:var(--mono)}
-.last-view{
-  font-size:11px;font-weight:600;color:var(--accent);
-  cursor:pointer;background:none;border:none;font-family:var(--sans);
-  padding:0;
-}
-.last-view:hover{color:var(--accent3)}
+      /* Last capture */
+      .last {
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+        min-height: 38px;
+      }
+      .last-info {
+        font-size: 11px;
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+      .last-view {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--accent);
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: var(--sans);
+        padding: 0;
+      }
+      .last-view:hover {
+        color: var(--accent3);
+      }
 
-/* Footer */
-.footer{
-  padding:8px 16px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.footer-brand{font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:0.5px}
-.footer-note{font-size:10px;color:var(--muted)}
-</style>
-</head>
-<body>
-
-<div class="hdr">
-  <div class="logo">
-    <div class="logo-icon">
-      <svg viewBox="0 0 14 14" fill="none">
-        <path d="M2 4h10M2 7h7M2 10h5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M10 9l2 2-2 2" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      /* Footer */
+      .footer {
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .footer-brand {
+        font-size: 10px;
+        color: var(--muted);
+        font-family: var(--mono);
+        letter-spacing: 0.5px;
+      }
+      .footer-note {
+        font-size: 10px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hdr">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 14 14" fill="none">
+            <path
+              d="M2 4h10M2 7h7M2 10h5"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M10 9l2 2-2 2"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="logo-name">Snip<span>wise</span></div>
+      </div>
+      <div class="hdr-r">
+        <button class="tbtn" id="themeBtn">
+          <div class="tthumb" id="themeThumb"></div>
+        </button>
+        <div class="status-dot"></div>
+      </div>
     </div>
-    <div class="logo-name">Snip<span>wise</span></div>
-  </div>
-  <div class="hdr-r">
-    <button class="tbtn" id="themeBtn">
-      <div class="tthumb" id="themeThumb"></div>
-    </button>
-    <div class="status-dot"></div>
-  </div>
-</div>
 
-<div class="modes">
-  <div class="mode" id="modeVisible">
-    <div class="mode-icon">📷</div>
-    <div class="mode-title">Visible Area</div>
-    <div class="mode-desc">Capture what's on screen right now</div>
-  </div>
-  <div class="mode" id="modeFull">
-    <div class="mode-icon">📄</div>
-    <div class="mode-title">Full Page</div>
-    <div class="mode-desc">Scroll and capture the entire page</div>
-  </div>
-  <div class="mode" id="modeCrop">
-    <div class="mode-icon">✂️</div>
-    <div class="mode-title">Crop Region</div>
-    <div class="mode-desc">Draw a rectangle to capture</div>
-  </div>
-  <div class="mode" id="modePdf">
-    <div class="mode-icon">🖨️</div>
-    <div class="mode-title">Save as PDF</div>
-    <div class="mode-desc">Export full page to PDF file</div>
-  </div>
-</div>
+    <div class="modes">
+      <div class="mode" id="modeVisible">
+        <div class="mode-icon">📷</div>
+        <div class="mode-title">Visible Area</div>
+        <div class="mode-desc">Capture what's on screen right now</div>
+      </div>
+      <div class="mode" id="modeFull">
+        <div class="mode-icon">📄</div>
+        <div class="mode-title">Full Page</div>
+        <div class="mode-desc">Scroll and capture the entire page</div>
+      </div>
+      <div class="mode" id="modeCrop">
+        <div class="mode-icon">✂️</div>
+        <div class="mode-title">Crop Region</div>
+        <div class="mode-desc">Draw a rectangle to capture</div>
+      </div>
+      <div class="mode" id="modePdf">
+        <div class="mode-icon">🖨️</div>
+        <div class="mode-title">Save as PDF</div>
+        <div class="mode-desc">Export full page to PDF file</div>
+      </div>
+    </div>
 
-<div class="last">
-  <div class="last-info" id="lastInfo">No captures yet</div>
-  <button class="last-view" id="lastView" style="display:none">View last ↗</button>
-</div>
+    <div class="last">
+      <div class="last-info" id="lastInfo">No captures yet</div>
+      <button class="last-view" id="lastView" style="display: none">
+        View last ↗
+      </button>
+    </div>
 
-<div class="footer">
-  <span class="footer-brand">SNIPWISE v1.0</span>
-  <span class="footer-note">100% local · no uploads</span>
-</div>
+    <div class="footer">
+      <span class="footer-brand">SNIPWISE v1.0</span>
+      <span class="footer-note">100% local · no uploads</span>
+    </div>
 
-<script src="popup.js"></script>
-</body>
+    <script src="popup.js"></script>
+  </body>
 </html>

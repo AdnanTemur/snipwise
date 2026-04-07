@@ -4,7 +4,7 @@
 function applyTheme(light) {
   document.documentElement.classList.toggle("light", light);
 }
-chrome.storage.local.get(["theme"], (r) => applyTheme(r.theme === "light"));
+chrome.storage.local.get(["theme"], (r) => applyTheme(r.theme !== "dark"));
 document.getElementById("themeBtn").addEventListener("click", () => {
   const light = !document.documentElement.classList.contains("light");
   applyTheme(light);
@@ -28,15 +28,15 @@ const state = {
   snapshots: [],
 };
 
-// ── Load capture ──────────────────────────────────────────────────────────────
-chrome.storage.local.get(["pendingCapture"], (r) => {
-  if (!r.pendingCapture) {
+// ── Load capture via messaging (avoids storage quota) ────────────────────────
+chrome.runtime.sendMessage({ action: "getCaptureData" }, (capture) => {
+  if (!capture || !capture.dataUrl) {
     document
       .getElementById("loading")
       .querySelector(".loading-text").textContent = "No capture found.";
     return;
   }
-  const { dataUrl, title, ts } = r.pendingCapture;
+  const { dataUrl, title, ts } = capture;
   const img = new Image();
   img.onload = () => {
     baseCanvas.width = drawCanvas.width = img.width;
@@ -52,9 +52,6 @@ chrome.storage.local.get(["pendingCapture"], (r) => {
       `${img.width} × ${img.height}px`;
     document.getElementById("statusText").textContent =
       `Captured: ${title || "Untitled"}`;
-
-    chrome.storage.local.set({ lastCapture: { editorUrl: location.href, ts } });
-    chrome.storage.local.remove("pendingCapture");
   };
   img.src = dataUrl;
 });
