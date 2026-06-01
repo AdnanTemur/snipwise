@@ -41,6 +41,19 @@ chrome.runtime.sendMessage({ action: "getCaptureData" }, (capture) => {
   img.onload = () => {
     baseCanvas.width = drawCanvas.width = img.width;
     baseCanvas.height = drawCanvas.height = img.height;
+
+    // DISPLAY FIX: the canvas backing store is at device-pixel resolution
+    // (img.width = CSS width × devicePixelRatio). With no CSS size, the canvas
+    // renders at that many *CSS* pixels — on a HiDPI screen (DPR 2) that's twice
+    // the window width, so the image overflowed the editor and got centre-clipped:
+    // the left of the shot was unreachable and the far edge showed empty backdrop.
+    // Pin the on-screen size to the logical (CSS-pixel) dimensions; CSS
+    // max-width:100% then shrinks it to fit when the window is narrower. Only
+    // baseCanvas needs the inline width — drawCanvas is width/height:100% and
+    // tracks the container. Export uses the full-res backing store, unchanged.
+    const dpr = window.devicePixelRatio || 1;
+    baseCanvas.style.width = img.width / dpr + "px";
+
     baseCtx.drawImage(img, 0, 0);
     pushUndo();
 
@@ -594,6 +607,8 @@ function startCanvasCrop() {
       c.height = ch;
     });
     baseCtx.drawImage(merged, cx, cy, cw, ch, 0, 0, cw, ch);
+    // Keep the on-screen size in sync with the new (smaller) backing store.
+    baseCanvas.style.width = cw / (window.devicePixelRatio || 1) + "px";
     drawCtx.clearRect(0, 0, cw, ch);
     state.snapshots = [];
     pushUndo();
