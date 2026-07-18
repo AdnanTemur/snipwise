@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Snipwise - Screenshot & PDF",
-  "version": "1.0.3",
-  "description": "Screenshot any page - visible area, full page, or crop. Annotate, then save as PNG or PDF. 100% local, no uploads.",
+  "version": "2.0.0",
+  "description": "Screenshot, combine images, and annotate with a full multi-page editor. Export to PNG or a customizable PDF. 100% local, no uploads.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -22,7 +22,15 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["editor.html", "pdf.html", "pdf.js", "jspdf.min.js"],
+      "resources": [
+        "editor.html", "pdf.html", "pdf.js", "jspdf.min.js",
+        "editor/*.js",
+        "editor/core/*.js",
+        "editor/render/*.js",
+        "editor/tools/*.js",
+        "editor/ui/*.js",
+        "editor/io/*.js"
+      ],
       "matches": ["<all_urls>"]
     }
   ]
