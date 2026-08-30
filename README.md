@@ -71,7 +71,7 @@ Colors aren't limited to a preset palette — pick any color via the swatches, t
 ### Developer Mode (Local)
 
 ```bash
-git clone https://github.com/AdnanTemur/snipwise.git
+git clone https://github.com/AdnanTemurBarcha/snipwise.git
 ```
 
 1. Open Chrome → go to `chrome://extensions`
@@ -240,7 +240,7 @@ Snipwise is 100% local. No data ever leaves your device.
 
 The only external resource is the Google Fonts stylesheet for editor typography — a standard browser request with no user identifiers.
 
-Full privacy policy: [https://adnantemur.github.io/snipwise/privacy](https://adnantemur.github.io/snipwise/privacy)
+Full privacy policy: [https://snipwise.nexylius.com/privacy/](https://snipwise.nexylius.com/privacy/)
 
 ---
 
@@ -292,7 +292,7 @@ Pull requests welcome. A few things to keep in mind:
 
 ## Related
 
-- [SwiftCheck](https://github.com/AdnanTemur/swiftcheck) — Internet speed test in MB/s, also built by the same developer
+- [SwiftCheck](https://github.com/AdnanTemurBarcha/swift-check) — Internet speed test in MB/s, also built by the same developer
 
 ---
 
@@ -306,4 +306,4 @@ MIT — do whatever you want, attribution appreciated.
 
 - PDF export: [jsPDF](https://github.com/parallax/jsPDF) — bundled locally
 - Fonts: [Inter](https://fonts.google.com/specimen/Inter), [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) via Google Fonts
-- Built by [Adnan Temur Barcha](https://github.com/AdnanTemur)
+- Built by [Adnan Temur Barcha](https://github.com/AdnanTemurBarcha)
