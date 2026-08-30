@@ -63,6 +63,11 @@ $("modeCrop").addEventListener("click", async () => {
   window.close();
 });
 
+$("modeBlank").addEventListener("click", () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL("editor.html") });
+  window.close();
+});
+
 $("modePdf").addEventListener("click", async () => {
   const tab = await getActiveTab();
   if (!isInjectableTab(tab)) {
